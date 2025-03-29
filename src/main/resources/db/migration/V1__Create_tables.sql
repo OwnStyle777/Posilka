@@ -1,0 +1,54 @@
+CREATE TABLE IF NOT EXISTS training(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(255) NOT NULL,
+    date_from TEXT NOT NULL,
+    date_to TEXT NOT NULL,
+    duration TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS  training_template(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(255) NOT NULL,
+    training_id INTEGER,
+    FOREIGN KEY (training_id) REFERENCES training(id) ON DELETE SET NULL
+);
+
+CREATE TABLE IF NOT EXISTS  exercise(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(255) NOT NULL,
+    instructions TEXT NOT NULL,
+    muscle_group VARCHAR(255) NOT NULL,
+    difficulty VARCHAR(255) NOT NULL,
+    muscles TEXT NOT NULL,
+    pr VARCHAR(255),
+    media_url VARCHAR(255),
+    training_template_id INTEGER,
+    FOREIGN KEY (training_template_id) REFERENCES training_template(id) ON DELETE SET NULL
+);
+
+CREATE TABLE IF NOT EXISTS  history(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    exercise_id INTEGER NOT NULL,
+    FOREIGN KEY (exercise_id) REFERENCES exercise(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS  historic_series(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    set_number INTEGER NOT NULL,
+    reps INTEGER NOT NULL,
+    kg INTEGER NOT NULL,
+    completed BOOLEAN NOT NULL DEFAULT FALSE,
+    history_id INTEGER NOT NULL,
+    FOREIGN KEY (history_id) REFERENCES history(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS  series(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    set_number INTEGER NOT NULL,
+    reps INTEGER NOT NULL,
+    kg INTEGER NOT NULL,
+    completed BOOLEAN NOT NULL DEFAULT FALSE,
+    exercise_id INTEGER NOT NULL,
+    FOREIGN KEY (exercise_id) REFERENCES exercise(id) ON DELETE CASCADE
+);
