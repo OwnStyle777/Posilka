@@ -1,7 +1,5 @@
 package com.example.Posilka.model
 
-import com.example.Posilka.model.Enums.Difficulty
-import com.example.Posilka.model.Enums.Muscle
 import com.example.Posilka.model.Enums.MuscleGroup
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -12,40 +10,47 @@ import jakarta.persistence.Table
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.EnumType;
+
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.ManyToOne
 
 @Entity
-@Table(name = "exercises")
+@Table(name = "exercise")
 class Exercise (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     val id: Long = 0,
 
     @Column(nullable = false, length = 255)
     val name: String,
 
     @OneToMany(mappedBy = "exercise", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    var series: List<Series> = emptyList(),
+
+    @OneToMany(mappedBy = "exercise", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     var history: List<History> = emptyList(),
+
+    @ManyToOne
+    @JoinColumn(name = "training_template_id")
+    var trainingTemplate: TrainingTemplate? = null,
 
     @Column(columnDefinition = "TEXT")
     val instructions: String,
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    val muscleGroup: MuscleGroup,
+    val muscleGroup: String,
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    val difficulty: Difficulty,
+    val difficulty: String,
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    val muscle: List<Muscle> = emptyList(),
+    val muscles: String,
 
+    @Column
     var pr: String? = null,
 
+    @Column
     val mediaUrl: String? = null
-
 
 )

@@ -25,12 +25,10 @@ data class TrainingTemplate(
     var name: String,
 
     @OneToMany(mappedBy = "trainingTemplate", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    @Column
     var exercises: List<Exercise> = emptyList(),
 
     @ManyToOne
     @JoinColumn(name = "training_id")
-    @Column
     var training: Training? = null
 
 )

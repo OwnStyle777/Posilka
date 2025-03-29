@@ -25,15 +25,14 @@ data class Training(
     var name: String,
 
     @OneToMany(mappedBy = "training", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    @Column
     var exercises: List<Exercise> = emptyList(),
 
     @OneToMany(mappedBy = "training", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    @Column
     var trainingTemplates: List<TrainingTemplate> = emptyList(),
 
+    @Column
     val dateFrom: LocalDateTime,
-
+    @Column
     val dateTo: LocalDateTime,
 
     @Column(nullable = false)

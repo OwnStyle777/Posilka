@@ -31,6 +31,5 @@ data class HistorySeries(
 
     @ManyToOne
     @JoinColumn(name = "history_id")
-    @Column
     var history: History
 )
