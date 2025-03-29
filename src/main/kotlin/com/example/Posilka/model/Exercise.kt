@@ -35,6 +35,10 @@ class Exercise (
     @JoinColumn(name = "training_template_id")
     var trainingTemplate: TrainingTemplate? = null,
 
+    @ManyToOne
+    @JoinColumn(name = "training_id")
+    var training: Training? = null,
+
     @Column(columnDefinition = "TEXT")
     val instructions: String,
 
