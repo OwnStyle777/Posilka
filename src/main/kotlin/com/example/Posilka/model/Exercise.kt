@@ -26,10 +26,10 @@ class Exercise (
     val name: String,
 
     @OneToMany(mappedBy = "exercise", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var series: List<Series> = emptyList(),
+    var series: MutableList<Series> = mutableListOf(),
 
     @OneToMany(mappedBy = "exercise", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var history: List<History> = emptyList(),
+    var history: MutableList<History> = mutableListOf(),
 
     @ManyToOne
     @JoinColumn(name = "training_template_id")

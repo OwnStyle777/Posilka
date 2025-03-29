@@ -28,6 +28,6 @@ data class History(
     var exercise: Exercise,
 
     @OneToMany(mappedBy = "history", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var series: List<HistorySeries> = emptyList()
+    var series: MutableList<HistorySeries> = mutableListOf()
 
 )

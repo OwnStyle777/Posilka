@@ -25,10 +25,10 @@ data class Training(
     var name: String,
 
     @OneToMany(mappedBy = "training", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var exercises: List<Exercise> = emptyList(),
+    var exercises: MutableList<Exercise> = mutableListOf(),
 
     @OneToMany(mappedBy = "training", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var trainingTemplates: List<TrainingTemplate> = emptyList(),
+    var trainingTemplates: MutableList<TrainingTemplate> = mutableListOf(),
 
     @Column
     val dateFrom: LocalDateTime,
