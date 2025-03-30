@@ -16,7 +16,7 @@ import jakarta.persistence.ManyToOne
 
 @Entity
 @Table(name = "exercise")
-class Exercise (
+data class Exercise (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
