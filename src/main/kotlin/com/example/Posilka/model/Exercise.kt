@@ -1,6 +1,5 @@
 package com.example.Posilka.model
 
-import com.example.Posilka.model.Enums.MuscleGroup
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
