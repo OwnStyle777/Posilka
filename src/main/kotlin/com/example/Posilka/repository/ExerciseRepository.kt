@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface ExerciseRepository :JpaRepository<Exercise, Long> {
     fun findByTrainingId(trainingId: Long): List<Exercise>
-    fun findByTrainingTemplate(trainingTemplateId: Long): List<Exercise>
+    fun findByTrainingTemplateId(trainingTemplateId: Long): List<Exercise>
 }
