@@ -18,4 +18,8 @@ class ExerciseService(private val exerciseRepository: ExerciseRepository) {
     fun save(exercise: Exercise): Exercise = exerciseRepository.save(exercise)
 
     fun deleteById(id: Long) = exerciseRepository.deleteById(id)
+
+    fun findByTrainingId(id: Long) = exerciseRepository.findByTrainingId(id);
+
+    fun findByTrainingTemplateId (id: Long) = exerciseRepository.findByTrainingTemplate(id);
 }
