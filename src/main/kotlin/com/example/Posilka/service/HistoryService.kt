@@ -17,4 +17,6 @@ class HistoryService(val historyRepository: HistoryRepository) {
     fun save(history: History): History = historyRepository.save(history)
 
     fun deleteById(id: Long) = historyRepository.deleteById(id)
+
+    fun findByExerciseId(id: Long) = historyRepository.findByExerciseId(id)
 }

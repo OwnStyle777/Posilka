@@ -18,6 +18,8 @@ class SeriesService (val seriesRepository: SeriesRepository){
 
     fun deleteById(id: Long) = seriesRepository.deleteById(id)
 
+    fun findByExerciseId(id: Long) = seriesRepository.findByExerciseId(id);
+
 
 
 }

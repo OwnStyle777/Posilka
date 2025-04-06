@@ -19,4 +19,6 @@ class TrainingTemplateService (private val trainingTemplateRepository: TrainingT
     fun save(trainingTemplate: TrainingTemplate): TrainingTemplate = trainingTemplateRepository.save(trainingTemplate)
 
     fun deleteById(id: Long) = trainingTemplateRepository.deleteById(id)
+
+    fun findByTrainingId(id: Long) = trainingTemplateRepository.findByTrainingId(id);
 }
