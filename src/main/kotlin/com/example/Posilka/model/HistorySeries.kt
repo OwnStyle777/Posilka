@@ -30,6 +30,6 @@ data class HistorySeries(
     var completed: Boolean = false,
 
     @ManyToOne
-    @JoinColumn(name = "history_id")
-    var history: History
+    @JoinColumn(name = "history_id", nullable = false)
+    var historyId: Long
 )
