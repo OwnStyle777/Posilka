@@ -48,9 +48,7 @@ class ExerciseService(private val exerciseRepository: ExerciseRepository,  priva
         val existingExercise = exerciseRepository.findById(id).orElseThrow {
             IllegalArgumentException("Exercise with id $id doesn't exist")
         }
-        val updatedExercise = existingExercise.copy(
-            name = exerciseDto.name.takeIf { it.isNotEmpty() } ?: existingExercise.name,
-        )
+        val updatedExercise = exerciseMapper.updateEntity(exerciseDto, existingExercise)
         val savedExercise = exerciseRepository.save(updatedExercise)
         return exerciseMapper.toDto(savedExercise)
     }
