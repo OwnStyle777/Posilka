@@ -20,7 +20,7 @@ class HistoryMapper(private val exerciseService: ExerciseService, private val hi
     fun toEntity(dto: HistoryDto): History {
         return History(
             date = dto.date,
-            exercise = exerciseService.findById(dto.exerciseId),
+            exercise = exerciseService.findEntityById(dto.exerciseId),
             series = dto.series.map { historySeriesMapper.toEntity(it) }.toMutableList()
         )
     }
@@ -28,7 +28,7 @@ class HistoryMapper(private val exerciseService: ExerciseService, private val hi
     fun updateEntity(dto: HistoryDto, existing: History): History {
         return existing.copy(
             date = dto.date.takeIf { it != existing.date } ?: existing.date,
-            exercise = exerciseService.findById(dto.exerciseId),
+            exercise = exerciseService.findEntityById(dto.exerciseId),
             series = dto.series.mapNotNull { seriesDto ->
                 val existingSeries = existing.series.find { it.id == seriesDto.id }
                 existingSeries?.let { historySeriesMapper.updateEntity(seriesDto, it) }

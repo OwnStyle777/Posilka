@@ -26,12 +26,12 @@ class SeriesMapper (private val exerciseService: ExerciseService){
             reps = dto.reps,
             kg = dto.kg,
             completed = dto.completed,
-            exercise = exerciseService.findById(dto.exerciseId)
+            exercise = exerciseService.findEntityById(dto.exerciseId)
         )
     }
 
     fun updateEntity(dto: SeriesDto, existing: Series): Series {
-        val updatedExercise = if (dto.exerciseId != 0L) exerciseService.findById(dto.exerciseId) else existing.exercise
+        val updatedExercise = if (dto.exerciseId != 0L) exerciseService.findEntityById(dto.exerciseId) else existing.exercise
         return existing.copy(
             setNumber = if (dto.setNumber != 0 ) dto.setNumber else existing.setNumber,
             reps = if (dto.reps != 0 ) dto.reps else existing.reps,

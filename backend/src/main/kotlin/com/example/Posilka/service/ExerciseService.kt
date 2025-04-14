@@ -16,6 +16,13 @@ class ExerciseService(private val exerciseRepository: ExerciseRepository,  priva
         return exerciseMapper.toDto(exercise)
     }
 
+    fun findEntityById(id: Long): Exercise {
+        val exercise = exerciseRepository.findById(id).orElseThrow {
+            IllegalArgumentException("Exercise with id $id doesn't exist")
+        }
+        return exercise;
+    }
+
     fun findAll(): List<ExerciseDto> {
         val exercises = exerciseRepository.findAll()
         return exercises.map { exerciseMapper.toDto(it) }
