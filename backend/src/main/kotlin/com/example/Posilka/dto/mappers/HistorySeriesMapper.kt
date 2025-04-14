@@ -2,10 +2,12 @@ package com.example.Posilka.dto.mappers
 
 import com.example.Posilka.dto.HistorySeriesDto
 import com.example.Posilka.model.HistorySeries
+import com.example.Posilka.service.ExerciseService
+import com.example.Posilka.service.HistoryService
 import org.springframework.stereotype.Component
 
 @Component
-class HistorySeriesMapper {
+class HistorySeriesMapper(private val historyService: HistoryService){
 
     fun toDto(entity: HistorySeries): HistorySeriesDto {
         return HistorySeriesDto(
@@ -14,7 +16,7 @@ class HistorySeriesMapper {
             kg = entity.kg,
             completed = entity.completed,
             setNumber = entity.setNumber,
-            historyId = entity.historyId
+            historyId = entity.history?.id ?: throw IllegalStateException("History cannot be null")
         )
     }
 
@@ -24,7 +26,7 @@ class HistorySeriesMapper {
             reps = dto.reps,
             kg = dto.kg,
             completed = dto.completed,
-            historyId = dto.historyId
+            history = historyService.findById(dto.historyId)
         )
     }
 
@@ -34,7 +36,7 @@ class HistorySeriesMapper {
             reps = if (dto.reps != 0) dto.reps else existing.reps,
             kg = if (dto.kg != 0) dto.kg else existing.kg,
             completed = dto.completed,
-            historyId = if (dto.historyId != 0L) dto.historyId else existing.historyId
+            history = historyService.findById(dto.historyId)
         )
     }
 }
