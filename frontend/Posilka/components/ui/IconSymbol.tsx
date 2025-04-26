@@ -13,6 +13,9 @@ const MAPPING = {
   'paperplane.fill': 'send',
   'chevron.left.forwardslash.chevron.right': 'code',
   'chevron.right': 'chevron-right',
+  'dumbbell': 'fitness-center',   // Exercises
+  'list.bullet': 'menu',           // Training
+  'clock.fill': 'access-time'
 } as Partial<
   Record<
     import('expo-symbols').SymbolViewProps['name'],
