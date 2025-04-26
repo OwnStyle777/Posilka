@@ -23,23 +23,20 @@ class ExerciseController (private val exerciseService: ExerciseService){
         return ResponseEntity.ok(exerciseDto)
     }
 
-    @GetMapping
+    @GetMapping("/getAll")
     fun getAllExercises(): ResponseEntity<List<ExerciseDto>> {
         val exerciseDtos = exerciseService.findAll()
         return ResponseEntity.ok(exerciseDtos)
     }
 
-    @PostMapping
+    @PostMapping("/create")
     fun createExercise(@RequestBody exerciseDto: ExerciseDto): ResponseEntity<ExerciseDto> {
         val createdExerciseDto = exerciseService.save(exerciseDto)
         return ResponseEntity.status(HttpStatus.CREATED).body(createdExerciseDto)
     }
 
     @PutMapping("/{id}")
-    fun updateExercise(
-        @PathVariable id: Long,
-        @RequestBody exerciseDto: ExerciseDto
-    ): ResponseEntity<ExerciseDto> {
+    fun updateExercise(@PathVariable id: Long, @RequestBody exerciseDto: ExerciseDto): ResponseEntity<ExerciseDto> {
         val updatedExerciseDto = exerciseService.update(id, exerciseDto)
         return ResponseEntity.ok(updatedExerciseDto)
     }
