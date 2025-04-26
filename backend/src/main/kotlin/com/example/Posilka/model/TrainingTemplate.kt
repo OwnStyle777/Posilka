@@ -24,10 +24,7 @@ data class TrainingTemplate(
     @Column(nullable = false, length = 255)
     var name: String,
 
-    @OneToMany(mappedBy = "trainingTemplate", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var exercises: MutableList<Exercise> = mutableListOf(),
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
     @JoinColumn(name = "training_id")
     var training: Training? = null
 

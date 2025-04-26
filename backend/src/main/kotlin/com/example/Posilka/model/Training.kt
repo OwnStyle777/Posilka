@@ -24,14 +24,9 @@ data class Training(
     @Column(nullable = false, length = 255)
     var name: String,
 
-    @OneToMany(mappedBy = "training", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var exercises: MutableList<Exercise> = mutableListOf(),
-
-    @OneToMany(mappedBy = "training", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var trainingTemplates: MutableList<TrainingTemplate> = mutableListOf(),
-
     @Column
     val dateFrom: LocalDateTime,
+
     @Column
     val dateTo: LocalDateTime,
 

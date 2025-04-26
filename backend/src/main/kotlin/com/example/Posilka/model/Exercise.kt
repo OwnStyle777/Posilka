@@ -24,17 +24,11 @@ data class Exercise (
     @Column(nullable = false, length = 255)
     val name: String,
 
-    @OneToMany(mappedBy = "exercise", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var series: MutableList<Series> = mutableListOf(),
-
-    @OneToMany(mappedBy = "exercise", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var history: MutableList<History> = mutableListOf(),
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
     @JoinColumn(name = "training_template_id")
     var trainingTemplate: TrainingTemplate? = null,
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
     @JoinColumn(name = "training_id")
     var training: Training? = null,
 

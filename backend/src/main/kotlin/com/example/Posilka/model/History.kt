@@ -9,7 +9,6 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
-import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 import java.time.LocalDateTime
 
@@ -23,11 +22,9 @@ data class History(
 
     val date: LocalDateTime = LocalDateTime.now(),
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
     @JoinColumn(name = "exercise_id")
     var exercise: Exercise,
 
-    @OneToMany(mappedBy = "history", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var series: MutableList<HistorySeries> = mutableListOf()
 
 )
