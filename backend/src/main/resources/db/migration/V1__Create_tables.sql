@@ -23,7 +23,9 @@ CREATE TABLE IF NOT EXISTS  exercise(
     pr VARCHAR(255),
     media_url VARCHAR(255),
     training_template_id INTEGER,
-    FOREIGN KEY (training_template_id) REFERENCES training_template(id) ON DELETE SET NULL
+    training_id INTEGER,
+    FOREIGN KEY (training_template_id) REFERENCES training_template(id) ON DELETE SET NULL,
+    FOREIGN KEY (training_id) REFERENCES training(id) ON DELETE SET NULL
 );
 
 CREATE TABLE IF NOT EXISTS  history(
