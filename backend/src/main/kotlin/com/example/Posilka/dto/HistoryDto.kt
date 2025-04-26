@@ -7,6 +7,5 @@ data class HistoryDto(
     val id: Long? = null,
     val date: LocalDateTime,
     val exerciseId: Long,
-    val series: List<HistorySeriesDto> = listOf(),
 
     )
