@@ -1,14 +1,14 @@
 import axios from "axios";
-import { Exercise } from "../types/Exercise";
+import { Exercise } from "../../types/Exercise";
 
-const BASE_URL = "http://localhost:8080/api/exercises";
+const BASE_URL = "http://192.168.1.12:8080/api/exercises";
 
 export const getExerciseById = (id: number) => {
   return axios.get<Exercise>(`${BASE_URL}/${id}`);
 };
 
 export const getAllExercises = () => {
-  return axios.get<Exercise[]>(BASE_URL);
+  return axios.get<Exercise[]>(`${BASE_URL}/getAll`);
 };
 
 export const createExercise = (exercise: Exercise) => {

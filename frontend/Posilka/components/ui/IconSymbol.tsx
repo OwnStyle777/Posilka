@@ -15,7 +15,7 @@ const MAPPING = {
   'chevron.right': 'chevron-right',
   'dumbbell': 'fitness-center',   // Exercises
   'list.bullet': 'menu',           // Training
-  'clock.fill': 'access-time'
+  'clock.fill': 'schedule'
 } as Partial<
   Record<
     import('expo-symbols').SymbolViewProps['name'],
