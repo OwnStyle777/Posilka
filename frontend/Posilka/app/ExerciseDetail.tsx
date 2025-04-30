@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Avatar, Button, Card, Title, Paragraph, Text } from 'react-native-paper';
+import { Avatar, Button, Card, Title, Paragraph, Text, Chip } from 'react-native-paper';
 import { SvgUri } from 'react-native-svg';
-import { Exercise } from '@/types/Exercise';
+import { Exercise } from '@/app/types/Exercise';
 import { getExerciseById } from '@/app/api/ExerciseService'; 
 import { useLocalSearchParams } from 'expo-router';
 
@@ -53,6 +53,13 @@ const ExerciseDetail = () => {
   <Title style={styles.title}>{exercise.name}</Title>
 
   <Paragraph style={styles.text}><Text style={styles.icon}>💪</Text> Muscle Group: {exercise.muscleGroup}</Paragraph>
+  <View style={styles.chipContainer}>
+  {exercise.muscles?.split(',').map((muscle) => (
+    <Chip key={muscle.trim()} style={styles.chip} textStyle={styles.chipText}>
+      {muscle.trim()}
+    </Chip>
+  ))}
+</View>
   <Paragraph style={styles.text}><Text style={styles.icon}>⚙️</Text> Difficulty: {exercise.difficulty}</Paragraph>
   <Paragraph style={styles.text}><Text style={styles.icon}>📋</Text> Instructions: {exercise.instructions}</Paragraph>
 </Card.Content>
@@ -60,7 +67,7 @@ const ExerciseDetail = () => {
 <View style={styles.divider} />
 
 <Card.Actions>
-  <Button style={styles.button} labelStyle={styles.buttonText} onPress={() => console.log('Edit')}>
+  <Button style={styles.button} mode="contained"  textColor={'#fff'} onPress={() => console.log('Edit')}>
     Edit
   </Button>
 </Card.Actions>
@@ -69,11 +76,27 @@ const ExerciseDetail = () => {
 };
 
 const styles = StyleSheet.create({
-  button:{
-    backgroundColor: '#D1F5FF',
+  chipContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginVertical: 10,
   },
-  buttonText:{
-    color: '#333'
+  chip: {
+    marginRight: 8,
+    marginBottom: 8,
+    backgroundColor: '#E0F7FA',
+  },
+  chipText: {
+    color: '#333',
+    fontWeight: '500',
+  },
+  button:{
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+
   },
   container: {
     flex: 1,

@@ -1,4 +1,4 @@
-import { Training } from '@/types/Training';
+import { Training } from '@/app/types/Training';
 import axios from 'axios';
 
 const API_BASE_URL = 'http://localhost:8080/api/trainings';

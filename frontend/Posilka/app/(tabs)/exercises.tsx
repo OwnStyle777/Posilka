@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, TouchableOpacity, StyleSheet, SafeAreaView, View, StatusBar } from 'react-native';
+import { FlatList, TouchableOpacity, StyleSheet, SafeAreaView, View, StatusBar, Text } from 'react-native';
 import { Searchbar, Card, Title, Paragraph } from 'react-native-paper';
-import { getAllExercises } from '@/app/api/ExerciseService';
-import { Exercise } from '@/types/Exercise';
-import { Image } from 'react-native';
+import { createExercise, getAllExercises } from '@/app/api/ExerciseService';
+import { Exercise } from '@/app/types/Exercise';
 import { SvgUri } from 'react-native-svg';
-import ExerciseDetail from '@/app/ExerciseDetail';
 import { Link, router } from 'expo-router';
-import { linkTo } from 'expo-router/build/global-state/routing';
+import ExerciseForm from '../components/ExerciseForm';
 
 const ExerciseList = ({ navigation }: any) => {
   const [search, setSearch] = useState('');
   const [allExercises, setAllExercises] = useState<Exercise[]>([]);
   const [filteredExercises, setFilteredExercises] = useState<Exercise[]>([]);
+  const [formVisible, setFormVisible] = useState(false);
+
+
 
   useEffect(() => {
     const fetchExercises = async () => {
@@ -28,6 +29,19 @@ const ExerciseList = ({ navigation }: any) => {
 
     fetchExercises();
   }, []);
+
+  const handleCreateExercise = async (data: any) => {
+    console.log('Form submitted', data);
+    try {
+      const response = await createExercise(data);
+      const created = response.data;
+      setAllExercises(prev => [created, ...prev]);
+      setFilteredExercises(prev => [created, ...prev]);
+      setFormVisible(false);
+    } catch (err) {
+      console.error('Error creating exercise:', err);
+    }
+  };
 
   const handleSearch = (query: string) => {
     setSearch(query);
@@ -88,11 +102,51 @@ const ExerciseList = ({ navigation }: any) => {
         keyExtractor={(item) => item.id?.toString() || ''}
         contentContainerStyle={styles.listContent}
       />
+      <ExerciseForm
+      visible={formVisible}
+      onDismiss={() => setFormVisible(false)}
+      onSubmit={(data) => {
+      console.log('Form submitted', data);
+      handleCreateExercise(data);
+      setFormVisible(false);
+      }}
+      />
+      <TouchableOpacity
+      style={styles.fab}
+      onPress={() => setFormVisible(true)}
+    >
+      <Text style={styles.fabIcon}>+</Text>
+    </TouchableOpacity>
     </SafeAreaView>
+    
+    
   );
 };
 
 const styles = StyleSheet.create({
+
+  fab: {
+    position: 'absolute',
+    right: 20,
+    bottom: 100,
+    backgroundColor: '#00bcd4',
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+  },
+  
+  fabIcon: {
+    fontSize: 30,
+    color: '#fff',
+    lineHeight: 32,
+  },
   safeArea: {
     flex: 1,
     backgroundColor: '#fff',

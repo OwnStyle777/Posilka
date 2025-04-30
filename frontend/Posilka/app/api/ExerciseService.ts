@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Exercise } from "../../types/Exercise";
+import { Exercise } from "../types/Exercise";
 
 const BASE_URL = "http://192.168.1.12:8080/api/exercises";
 
@@ -12,7 +12,7 @@ export const getAllExercises = () => {
 };
 
 export const createExercise = (exercise: Exercise) => {
-  return axios.post<Exercise>(BASE_URL, exercise);
+  return axios.post<Exercise>(`${BASE_URL}/create`, exercise);
 };
 
 export const updateExercise = (id: number, exercise: Exercise) => {
