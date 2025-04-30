@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import { Portal, Modal, TextInput, Button, Title } from 'react-native-paper';
 import { Difficulty, MuscleGroup } from '../types/Arrays';
 import Dropdown from './Dropdown';
@@ -43,8 +43,13 @@ export default function ExerciseForm({ visible, onDismiss, onSubmit }: ExerciseF
     };
 
     return (
+   
         <Portal>
             <Modal visible={visible} onDismiss={onDismiss} contentContainerStyle={styles.modal}>
+            <KeyboardAvoidingView
+     behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+     keyboardVerticalOffset={60}
+  >
                 <Title style={styles.title}>Add New Exercise</Title>
                 <ScrollView>
                     <TextInput
@@ -87,6 +92,7 @@ export default function ExerciseForm({ visible, onDismiss, onSubmit }: ExerciseF
                     <Button mode="text" onPress={onDismiss}>Cancel</Button>
                     <Button mode="contained" style={styles.button} onPress={handleSave}>Save</Button>
                 </View>
+                </KeyboardAvoidingView>
             </Modal>
         </Portal>
     );
